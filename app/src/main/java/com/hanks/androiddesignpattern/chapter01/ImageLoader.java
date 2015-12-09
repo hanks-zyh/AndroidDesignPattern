@@ -14,31 +14,28 @@ import java.util.concurrent.Executors;
  */
 public class ImageLoader {
 
-    DoubleCache mDoubleCache = new DoubleCache();
-    // 图片内存缓存
-    ImageCache mImageCache = new ImageCache();
-
-    // 图片SD卡缓存
-    DiskCache mDiskCache = new DiskCache();
-
-    // 是否使用 SD 卡缓存
-    boolean isUseDiskCache = false;
+    ImageCache mImageCache = new MemoryCache();
 
     // 线程数,最大数目为cpu的数量
     ExecutorService mExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime()
             .availableProcessors());
 
-    public void useDiskCache(boolean isUseDiskCache) {
-        this.isUseDiskCache = isUseDiskCache;
+    public void setImageCache(ImageCache imageCache) {
+        mImageCache = imageCache;
     }
 
     public void displayImage(final ImageView imageView, @NonNull final String url) {
-        Bitmap bitmap = isUseDiskCache ? mDiskCache.get(url) : mImageCache.get(url);
+        Bitmap bitmap = mImageCache.get(url);
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
             return;
         }
 
+        submitLoadRequest(url, imageView);
+
+    }
+
+    private void submitLoadRequest(final String url, final ImageView imageView) {
         imageView.setTag(url);
         mExecutorService.submit(new Runnable() {
             @Override public void run() {

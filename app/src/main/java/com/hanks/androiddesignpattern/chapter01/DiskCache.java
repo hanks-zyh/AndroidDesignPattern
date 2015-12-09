@@ -9,21 +9,21 @@ import java.io.IOException;
  * 管理图片在sd的缓存
  * Created by hanks on 15-12-9.
  */
-public class DiskCache {
+public class DiskCache implements ImageCache {
     static String cacheDir = "sdcard/cache";
 
-    public Bitmap get(String url){
-        return BitmapFactory.decodeFile(cacheDir+ url);
+    @Override public Bitmap get(String url) {
+        return BitmapFactory.decodeFile(cacheDir + url);
     }
 
-    public void put(String imageUrl, Bitmap bitmap){
+    @Override public void put(String imageUrl, Bitmap bitmap) {
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(cacheDir + imageUrl);
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,fileOutputStream);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (fileOutputStream != null) {
                 try {
                     fileOutputStream.close();
