@@ -4,7 +4,6 @@ import android.graphics.BitmapFactory;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 /**
  * 管理图片在sd的缓存
  * Created by hanks on 15-12-9.
@@ -24,13 +23,7 @@ public class DiskCache implements ImageCache {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
-            if (fileOutputStream != null) {
-                try {
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            CloseUtils.closeQuietly(fileOutputStream);
         }
     }
 }
