@@ -14,13 +14,41 @@ import java.util.concurrent.Executors;
  */
 public class ImageLoader {
 
-    ImageCache mImageCache = new MemoryCache();
-
+    private static ImageLoader sInstance;
+    ImageLoaderConfig mConfig;
+    BitmapCache mImageCache = new MemoryCache();
     // 线程数,最大数目为cpu的数量
     ExecutorService mExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime()
             .availableProcessors());
 
-    public void setImageCache(ImageCache imageCache) {
+    private ImageLoader() {}
+
+    public static ImageLoader getInstance() {
+        if (sInstance == null) {
+            synchronized (ImageLoader.class) {
+                if (sInstance == null) {
+                    sInstance = new ImageLoader();
+                }
+            }
+        }
+        return sInstance;
+    }
+
+    /**
+     * 初始化 ImageLoader
+     *
+     * @param config
+     */
+    public void init(ImageLoaderConfig config) {
+        mConfig = config;
+        checkConfig();
+    }
+
+    private void checkConfig() {
+
+    }
+
+    public void setImageCache(BitmapCache imageCache) {
         mImageCache = imageCache;
     }
 

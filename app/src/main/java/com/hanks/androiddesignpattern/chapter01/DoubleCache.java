@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
  * 缓存图片在内存和sd卡都缓存一份
  * Created by hanks on 15-12-9.
  */
-public class DoubleCache implements ImageCache {
+public class DoubleCache implements BitmapCache {
     MemoryCache mImageCache = new MemoryCache();
     DiskCache   mDiskCache  = new DiskCache();
 

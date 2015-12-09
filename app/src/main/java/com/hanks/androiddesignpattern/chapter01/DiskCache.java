@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
  * 管理图片在sd的缓存
  * Created by hanks on 15-12-9.
  */
-public class DiskCache implements ImageCache {
+public class DiskCache implements BitmapCache {
     static String cacheDir = "sdcard/cache";
 
     @Override public Bitmap get(String url) {

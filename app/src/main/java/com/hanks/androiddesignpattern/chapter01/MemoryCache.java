@@ -5,7 +5,7 @@ import android.util.LruCache;
  * 负责管理图片缓存
  * Created by hanks on 15-12-9.
  */
-public class MemoryCache implements ImageCache {
+public class MemoryCache implements BitmapCache {
     LruCache<String, Bitmap> mImageCache;
 
     public MemoryCache() {
