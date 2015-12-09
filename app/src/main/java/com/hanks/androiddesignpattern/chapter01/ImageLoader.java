@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
  */
 public class ImageLoader {
 
+    DoubleCache mDoubleCache = new DoubleCache();
     // 图片内存缓存
     ImageCache mImageCache = new ImageCache();
 
@@ -51,6 +52,7 @@ public class ImageLoader {
                 mImageCache.put(url, bitmap);
             }
         });
+
     }
 
     private Bitmap downloadImage(String imageUrl) {
