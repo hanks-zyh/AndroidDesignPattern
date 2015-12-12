@@ -10,7 +10,7 @@ public class ImageLoaderConfig {
 
     DisplayConfig displayConfig = new DisplayConfig();
 
-    LoadPolicy loadPolicy = new LoadPolicy();
+    LoadPolicy loadPolicy = new SerialPolicy();
 
     // cpu 数量加一个分发线程
     int threadCount = Runtime.getRuntime().availableProcessors() + 1;
@@ -29,7 +29,7 @@ public class ImageLoaderConfig {
         DisplayConfig displayConfig = new DisplayConfig();
 
         // 加载策略
-        LoadPolicy loadPolicy = new LoadPolicy();
+        LoadPolicy loadPolicy = new SerialPolicy();
 
         //线程数量
         int threadCount = Runtime.getRuntime().availableProcessors() + 1;
