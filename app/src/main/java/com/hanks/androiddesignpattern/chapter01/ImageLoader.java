@@ -16,7 +16,7 @@ public class ImageLoader {
 
     private static ImageLoader sInstance;
     ImageLoaderConfig mConfig;
-    BitmapCache mImageCache = new MemoryCache();
+    BitmapCache     mImageCache      = new MemoryCache();
     // 线程数,最大数目为cpu的数量
     ExecutorService mExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime()
             .availableProcessors());
@@ -58,9 +58,19 @@ public class ImageLoader {
             imageView.setImageBitmap(bitmap);
             return;
         }
-
         submitLoadRequest(url, imageView);
+    }
 
+    public void displayImage(final ImageView imageView, @NonNull final String url, final ImageLoaderConfig config, final ImageLoaderListener listener) {
+        BitmapRequest request = new BitmapRequest(imageView, url, config, listener);
+        request.displayConfig = config.displayConfig;
+        request.setLoadPolicy(config.loadPolicy);
+        Bitmap bitmap = mImageCache.get(url);
+        if (bitmap != null) {
+            imageView.setImageBitmap(bitmap);
+            return;
+        }
+        submitLoadRequest(url, imageView);
     }
 
     private void submitLoadRequest(final String url, final ImageView imageView) {
