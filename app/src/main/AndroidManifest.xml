@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.hanks.androiddesignpattern"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.hanks.androiddesignpattern"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -17,6 +18,7 @@
         </activity>
         <activity android:name=".chapter08.MainActivity"/>
         <activity android:name=".chapter08.LoginActivity"/>
+        <activity android:name=".chapter11.hdraw.DrawActivity"/>
     </application>
 
 </manifest>
