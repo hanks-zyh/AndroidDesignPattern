@@ -1,5 +1,6 @@
 package com.hanks.androiddesignpattern.chapter09;
 /**
+ *
  * Created by hanks on 15-12-12.
  */
 public class XiaoMin {
